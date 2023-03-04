@@ -1,13 +1,15 @@
+#! /usr/bin/python3
 import json
 import requests
 import smtplib
+import datetime
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
 
-loginUrl = "https://sockboom.lol/auth/login"
-checkinUrl = "https://sockboom.lol/user/checkin"
-lououtUrl = "https://sockboom.lol/user/logout"
+loginUrl = "https://sockboom.one/auth/login"
+checkinUrl = "https://sockboom.one/user/checkin"
+lououtUrl = "https://sockboom.one/user/logout"
 loginData = {"email":"","passwd":""}#需要填写sockboom登录信息
 my_sender=''#邮件发送者
 my_pass = '' #授权码
@@ -54,13 +56,10 @@ def mail(msg):
         return False
  
 if __name__=="__main__":
+    print (datetime.datetime.today ())
     checkinRes = checkin()
     if checkinRes:
-        ret=mail(checkinRes)
-        if ret:
-            print("签到成功,邮件发送成功")
-        else:
-            print("签到成功，邮件发送失败")
+        print("签到成功，未发送邮件")
     else:
         ret=mail("签到失败")
         if ret:
